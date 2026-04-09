@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPTech SARL</title>
+<link rel="stylesheet" href="styleMenuMobF.css">
+<link rel="stylesheet" href="stylecontact.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">
+    <a href="index.html">
+        <img src="logo_1CPtech.png" alt="Logo CPTech" height="60">
+    </a>
+    
+    <a href="index.html">
+       CPTech SARL
+    </a>
+    
+</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="solution.html">Solutions</a></li>
+        <li><a href="formation.html">Formations</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">A Propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mycv.html">MyCV</a></li>
+    </ul>
+
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- CORPS -->
+
+<header>
+    <h1>CPTech SARL</h1>
+    <p>Centre Professionnel de Formation en Technologies</p>
+    <p>Directeur : Emmanuel Mbamba | Kinshasa</p>
+</header>
+
+
+
+<section class="container">
+    <h2>Contactez CPTech SARL</h2>
+
+    <div class="contact-grid">
+
+        <!-- Formulaire -->
+        <div class="card">
+            <div class="success" id="successMessage">
+                ✅ Message envoyé avec succès !
+            </div>
+
+            <form id="contactForm">
+                <label>Nom complet</label>
+                <input type="text" name="nom" placeholder="Entrez votre nom complet" required>
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Entrez votre email" required>
+
+                <label>Message</label>
+                <textarea rows="5" name="message" placeholder="Saisissez votre message" required></textarea>
+
+                <button type="submit">Envoyer le message</button>
+            </form>
+        </div>
+
+        <!-- Informations -->
+        <div class="card">
+            <h3>Informations</h3>
+            <p><strong>Email :</strong> contact@cptech.cd</p>
+            <p><strong>Téléphone :</strong> +243 997 300 932/ 818451340</p>
+            <p><strong>Adresse :</strong> Kinshasa, République Démocratique du Congo</p>
+
+            <h3>Notre Localisation</h3>
+            <iframe 
+                src="https://maps.google.com/maps?q=Kinshasa&t=&z=13&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+<!-- FOOTER FIXE -->
+<footer>
+    <p>&copy; 2026 CPTech SARL - Excellence Digitale Internationale</p>
+</footer>
+<script src="javascrptMenus.js"></script>
+<script>
+
+/* Scroll effect */
+window.addEventListener("scroll", function(){
+    document.querySelector("nav")
+    .classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* Mobile toggle */
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+});
+
+</script>
+<script>
+    const form = document.getElementById("contactForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        successMessage.style.display = "block";
+        form.reset();
+    });
+</script>
+</body>
+</html>

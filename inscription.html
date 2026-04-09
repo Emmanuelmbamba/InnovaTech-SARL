@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPTech SARL - Inscription</title>
+<link rel="stylesheet" href="styleMenuMobF.css">
+<link rel="stylesheet" href="styleinscription.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">
+     <a href="index.html">
+        <img src="logo_1CPtech.png" alt="Logo CPTech" height="60">
+    </a>
+    
+    <a href="index.html">
+       CPTech SARL
+    </a>
+    
+</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="solution.html">Solutions</a></li>
+        <li><a href="formation.html">Formations</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">A Propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mycv.html">MyCV</a></li>
+    </ul>
+
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- CORPS -->
+
+<header>
+    <h1>CPTech</h1>
+    <p>Centre Professionnel de Formation Informatique</p>
+    <p>Directeur : Emmanuel Mbamba | Kinshasa</p>
+</header>
+
+
+<section class="container">
+    <h2>Formulaire d'Inscription</h2>
+
+    <div class="form-box">
+            <form id="inscriptionForm">
+            <label>Nom complet</label>
+            <input type="text" name="nom" placeholder="Entrez votre nom complet" required>
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Entrez votre email" required>
+
+            <label>Téléphone</label>
+            <input type="tel" name="telephone" placeholder="Entrez votre numéro de téléphone" required>
+
+            <label>Choisir une formation</label>
+            <select name="formation" required>
+                <option value="">-- Sélectionner --</option>
+                <option value="dev-web">Développement Web & Applications</option>
+                <option value="admin-reseau">Administration Réseau & Télécom</option>
+                <option value="gestion-entreprises">Gestion des Entreprises Publiques</option>
+                <option value="base-donnees">Base de Données</option>
+                <option value="cybersecurite">Cybersécurité</option>
+                <option value="maintenance">Maintenance Informatique</option>
+            </select>
+
+            <label>Message (optionnel)</label>
+            <textarea rows="4" name="message" placeholder="Saisissez votre message"></textarea>
+
+            <button type="submit">Envoyer l'inscription</button>
+            <div class="success" id="successMessage">
+                ✅ Inscription envoyée avec succès !
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+    const form = document.getElementById("inscriptionForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        successMessage.style.display = "block";
+        form.reset();
+    });
+</script>
+<!-- FOOTER FIXE -->
+<footer>
+    <p>&copy; 2026 CPTech SARL - Excellence Digitale Internationale</p>
+</footer>
+<script src="javascrptMenus.js"></script>
+<script>
+
+/* Scroll effect */
+window.addEventListener("scroll", function(){
+    document.querySelector("nav")
+    .classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* Mobile toggle */
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPTech SARL</title>
+<link rel="stylesheet" href="styleMenuMobF.css">
+<link rel="stylesheet" href="styleservice.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">
+     <a href="index.html">
+        <img src="logo_1CPtech.png" alt="Logo CPTech" height="60">
+    </a>
+    
+    <a href="index.html">
+       CPTech SARL
+    </a>
+    
+</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="solution.html">Solutions</a></li>
+        <li><a href="formation.html">Formations</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">A Propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mycv.html">MyCV</a></li>
+    </ul>
+
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- CORPS -->
+
+<section class="hero">
+    <h2>Nos Services Professionnels</h2>
+    <p>CPTech accompagne les entreprises publiques et privées dans leur transformation digitale avec des solutions innovantes et performantes.</p>
+     <a href="inscription.html"> <button class="btn">s'inscrire</button></a>
+</section>
+
+<section class="services">
+    <h2>Ce que nous offrons</h2>
+
+    <div class="service-grid">
+
+        <div class="service-card">
+            <h3>Développement Web & Mobile</h3>
+            <p>Conception de sites web professionnels, plateformes de gestion et applications modernes adaptées aux besoins des entreprises.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Administration Réseau</h3>
+            <p>Installation, sécurisation et maintenance des infrastructures réseaux pour assurer performance et continuité des services.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Formation en Transmission Télécom</h3>
+            <p><strong>NOC</strong> (Surveillance 24h/24 des équipements réseau): Détection des pannes, Intervention rapide en cas d’incident, Supervision de la performance du réseau et Sécurité et gestion des alertes.</p>
+        <p><strong>Back Office</strong> : Configuration des équipements de transmission, Gestion des liens entre sites, Analyse des incidents complexes, Optimisation des performances réseau, Planification des extensions de capacité.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Digitalisation des Entreprises Publiques</h3>
+            <p>Centralisation des fonctionnalités administratives pour améliorer la gestion interne et la performance organisationnelle.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Formation Informatique</h3>
+            <p>Programmes spécialisés en développement web, bases de données, cybersécurité et administration réseau.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Consulting IT</h3>
+            <p>Accompagnement stratégique pour optimiser les processus technologiques et intégrer des solutions innovantes.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="process">
+    <h2>Notre Processus</h2>
+    <div class="steps">
+        <div class="step">
+            <h4>1. Analyse</h4>
+            <p>Étude approfondie des besoins et des objectifs du client.</p>
+        </div>
+        <div class="step">
+            <h4>2. Planification</h4>
+            <p>Définition d’une stratégie adaptée et d’un plan d’action clair.</p>
+        </div>
+        <div class="step">
+            <h4>3. Déploiement</h4>
+            <p>Mise en œuvre technique et intégration des solutions.</p>
+        </div>
+        <div class="step">
+            <h4>4. Support</h4>
+            <p>Assistance continue et optimisation des performances.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Discutons de votre projet</h2>
+    <br>
+    <a href="contact.html">Demander un devis</a>
+</section>
+<!-- FOOTER FIXE -->
+<footer>
+    <p>&copy; 2026 CPTech SARL - Excellence Digitale Internationale</p>
+</footer>
+<script>
+
+/* Scroll effect */
+window.addEventListener("scroll", function(){
+    document.querySelector("nav")
+    .classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* Mobile toggle */
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active");
+});
+
+</script>
+
+</body>
+</html>

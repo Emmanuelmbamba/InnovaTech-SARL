@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPTech SARL - Connexion</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #1e293b;
+    --success: #10b981;
+    --error: #ef4444;
+    --glass: rgba(255,255,255,0.05);
+    --text: #ffffff;
+    --text-muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.login-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-section img {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.logo-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.logo-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper .material-icons {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.divider {
+    text-align: center;
+    margin: 30px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+}
+
+.divider span {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 0 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.register-link p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.register-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: var(--primary-dark);
+}
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    color: var(--success);
+}
+
+.alert-error {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--error);
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.spinner {
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+    
+    .logo-section h1 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="logo-section">
+            <img src="profilelogo2.jpg" alt="Logo CPTech">
+            <h1>CPTech SARL</h1>
+            <p>Centre Professionnel en Technologie</p>
+        </div>
+
+        <div class="alert alert-success" id="successAlert">
+            <span class="material-icons">check_circle</span>
+            <span>Connexion réussie ! Redirection...</span>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert">
+            <span class="material-icons">error</span>
+            <span id="errorMessage">Email ou mot de passe incorrect</span>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <span class="material-icons">email</span>
+                    <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="input-wrapper">
+                    <span class="material-icons">lock</span>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login" id="loginBtn">
+                Se connecter
+            </button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <span style="margin-left: 10px;">Connexion en cours...</span>
+            </div>
+        </form>
+
+        <div class="divider">
+            <span>OU</span>
+        </div>
+
+        <div class="register-link">
+            <p>Pas encore de compte ? <a href="register.html">Créer un compte</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Base de données utilisateurs simulée
+let users = JSON.parse(localStorage.getItem('cptech_users')) || [
+    {
+        id: 1,
+        email: 'admin@cptech.com',
+        password: 'admin123',
+        nom: 'Administrateur',
+        role: 'admin',
+        createdAt: new Date().toISOString()
+    },
+    {
+        id: 2,
+        email: 'user@cptech.com',
+        password: 'user123',
+        nom: 'Utilisateur Test',
+        role: 'user',
+        createdAt: new Date().toISOString()
+    }
+];
+
+const loginForm = document.getElementById('loginForm');
+const loginBtn = document.getElementById('loginBtn');
+const loading = document.getElementById('loading');
+const successAlert = document.getElementById('successAlert');
+const errorAlert = document.getElementById('errorAlert');
+const errorMessage = document.getElementById('errorMessage');
+
+loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    
+    // Validation
+    if (!email || !password) {
+        showError('Veuillez remplir tous les champs');
+        return;
+    }
+    
+    // Loading state
+    loginBtn.style.display = 'none';
+    loading.style.display = 'block';
+    hideAlerts();
+    
+    // Simulation d'une requête API
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Vérification des identifiants
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+        // Stocker la session
+        const session = {
+            user: {
+                id: user.id,
+                email: user.email,
+                nom: user.nom,
+                role: user.role
+            },
+            loginAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('cptech_session', JSON.stringify(session));
+        
+        // Afficher le succès
+        showSuccess();
+        
+        // Redirection selon le rôle
+        setTimeout(() => {
+            if (user.role === 'admin') {
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                window.location.href = 'user-dashboard.html';
+            }
+        }, 2000);
+        
+    } else {
+        showError('Email ou mot de passe incorrect');
+        loginBtn.style.display = 'block';
+        loading.style.display = 'none';
+    }
+});
+
+function showSuccess() {
+    successAlert.style.display = 'flex';
+    errorAlert.style.display = 'none';
+}
+
+function showError(message) {
+    errorMessage.textContent = message;
+    errorAlert.style.display = 'flex';
+    successAlert.style.display = 'none';
+}
+
+function hideAlerts() {
+    successAlert.style.display = 'none';
+    errorAlert.style.display = 'none';
+}
+
+// Vérifier si déjà connecté
+window.addEventListener('load', function() {
+    const session = JSON.parse(localStorage.getItem('cptech_session'));
+    if (session && session.user) {
+        if (session.user.role === 'admin') {
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            window.location.href = 'user-dashboard.html';
+        }
+    }
+});
+</script>
+
+</body>
+</html>
