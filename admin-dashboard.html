@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard - CPTech SARL</title>
+<title>Administration - InnovaTech SARL</title>
+<link rel="stylesheet" href="global-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -627,8 +628,8 @@ body {
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <img src="profilelogo2.jpg" alt="CPTech">
-        <h2>CPTech Admin</h2>
+        <img src="log1.jpeg" alt="InnovaTech">
+        <h2>InnovaTech Admin</h2>
     </div>
     
     <nav>
@@ -680,8 +681,8 @@ body {
         </div>
     </header>
 
-    <!-- STATS CARDS -->
-    <section class="stats-grid">
+    <!-- STATS GRID -->
+    <section class="stats-grid" id="dashboardStats">
         <div class="stat-card">
             <div class="stat-icon users">
                 <span class="material-icons">people</span>
@@ -732,7 +733,7 @@ body {
     </section>
 
     <!-- CHARTS -->
-    <section class="charts-grid">
+    <section class="charts-grid" id="dashboardCharts">
         <div class="chart-container">
             <div class="chart-header">
                 <h3 class="chart-title">Évolution des inscriptions</h3>
@@ -754,10 +755,13 @@ body {
     </section>
 
     <!-- USERS TABLE -->
-    <section class="table-container">
+    <section class="table-container" id="usersSection">
         <div class="table-header">
-            <h3 class="table-title">Utilisateurs récents</h3>
-            <button class="add-user-btn" id="addUserBtn">
+            <div>
+                <h3 class="table-title">Gestion des utilisateurs</h3>
+                <input type="text" id="searchUser" placeholder="Rechercher un utilisateur..." class="form-control" style="width: 300px; margin-top: 10px; padding: 10px;">
+            </div>
+            <button class="add-user-btn" id="addUserBtn" style="align-self: flex-start;">
                 <span class="material-icons">add</span>
                 Ajouter un utilisateur
             </button>
@@ -840,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function checkAuth() {
-    const session = JSON.parse(localStorage.getItem('cptech_session'));
+    const session = JSON.parse(localStorage.getItem('innovatech_session'));
     if (!session || !session.user || session.user.role !== 'admin') {
         window.location.href = 'login.html';
         return;
@@ -852,20 +856,34 @@ function checkAuth() {
 }
 
 function loadUsers() {
-    users = JSON.parse(localStorage.getItem('cptech_users')) || [];
+    users = JSON.parse(localStorage.getItem('innovatech_users')) || [];
 }
 
 function updateStats() {
     document.getElementById('totalUsers').textContent = users.length;
 }
 
-function populateUsersTable() {
+function populateUsersTable(searchTerm = '') {
     const tbody = document.getElementById('usersTableBody');
     tbody.innerHTML = '';
     
-    const recentUsers = users.slice(-10).reverse();
+    // Reverse users to show the latest added first
+    let filteredUsers = [...users].reverse();
     
-    recentUsers.forEach(user => {
+    // Apply search filter if present
+    if (searchTerm) {
+        searchTerm = searchTerm.toLowerCase();
+        filteredUsers = filteredUsers.filter(u => 
+            u.nom.toLowerCase().includes(searchTerm) || 
+            u.email.toLowerCase().includes(searchTerm) || 
+            u.role.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    // Show top 20 users max or all if requested
+    filteredUsers = filteredUsers.slice(0, 50);
+    
+    filteredUsers.forEach(user => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>
@@ -1019,7 +1037,7 @@ userForm.addEventListener('submit', function(e) {
         users.push(newUser);
     }
     
-    localStorage.setItem('cptech_users', JSON.stringify(users));
+    localStorage.setItem('innovatech_users', JSON.stringify(users));
     populateUsersTable();
     updateStats();
     modal.classList.remove('active');
@@ -1044,7 +1062,7 @@ function editUser(userId) {
 function deleteUser(userId) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
         users = users.filter(u => u.id !== userId);
-        localStorage.setItem('cptech_users', JSON.stringify(users));
+        localStorage.setItem('innovatech_users', JSON.stringify(users));
         populateUsersTable();
         updateStats();
     }
@@ -1052,7 +1070,7 @@ function deleteUser(userId) {
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('cptech_session');
+    localStorage.removeItem('innovatech_session');
     window.location.href = 'login.html';
 });
 
@@ -1076,8 +1094,35 @@ document.querySelectorAll('.sidebar-nav a').forEach(link => {
         e.preventDefault();
         document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
-        // Here you would load different page content
+        
+        const page = this.dataset.page;
+        
+        const stats = document.getElementById('dashboardStats');
+        const charts = document.getElementById('dashboardCharts');
+        const users = document.getElementById('usersSection');
+        
+        if (page === 'dashboard') {
+            stats.style.display = 'grid';
+            charts.style.display = 'grid';
+            users.style.display = 'block';
+            document.querySelector('.table-title').textContent = 'Utilisateurs récents';
+        } else if (page === 'users') {
+            stats.style.display = 'none';
+            charts.style.display = 'none';
+            users.style.display = 'block';
+            document.querySelector('.table-title').textContent = 'Gestion des utilisateurs';
+        } else {
+            // Other pages like courses, settings
+            stats.style.display = 'none';
+            charts.style.display = 'none';
+            users.style.display = 'none';
+        }
     });
+});
+
+// Search User Event
+document.getElementById('searchUser').addEventListener('input', function(e) {
+    populateUsersTable(e.target.value);
 });
 </script>
 

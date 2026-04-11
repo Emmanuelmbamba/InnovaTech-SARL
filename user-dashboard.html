@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Espace - CPTech SARL</title>
+<title>Mon Espace - InnovaTech SARL</title>
+<link rel="stylesheet" href="global-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -47,6 +48,7 @@ body {
     overflow-y: auto;
     z-index: 1000;
     border-right: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease;
 }
 
 .sidebar-header {
@@ -177,6 +179,46 @@ body {
     margin-left: var(--sidebar-width);
     padding: 30px;
     min-height: 100vh;
+    transition: margin-left 0.3s ease;
+}
+
+body.sidebar-collapsed .sidebar {
+    transform: translateX(-100%);
+}
+body.sidebar-collapsed .main-content {
+    margin-left: 0;
+}
+
+/* SIDEBAR TOGGLE ON DIVIDER */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 50%;
+    left: calc(var(--sidebar-width) - 15px); /* Place exactly on border */
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1002;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.sidebar-toggle-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Adjust button direction when collapsed */
+body.sidebar-collapsed .sidebar-toggle-btn {
+    left: 15px; /* Keep it visible on the main edge */
+    transform: translateY(-50%) rotate(180deg);
 }
 
 /* HEADER */
@@ -397,13 +439,28 @@ body {
 
 .activity-list {
     list-style: none;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.activity-list::-webkit-scrollbar {
+    width: 6px;
+}
+.activity-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+}
+.activity-list::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
 }
 
 .activity-item {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    padding: 20px 0;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -581,22 +638,32 @@ body {
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <img src="profilelogo2.jpg" alt="CPTech">
+        <a href="index.html" >
+        <img src="log1.jpeg" alt="InnovaTech" >
+        </a>
         <h2>Mon Espace</h2>
+        <button id="toggleProfileBtn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; margin-left:auto;">
+            <span class="material-icons">expand_less</span>
+        </button>
     </div>
-    
-    <div class="user-profile-section">
+
+    <div class="user-profile-section" id="userProfileSection">
         <div class="user-avatar-large" id="userAvatarLarge">U</div>
         <div class="user-name-large" id="userNameLarge">Utilisateur</div>
         <div class="user-email" id="userEmailLarge">user@email.com</div>
         <div class="user-formation" id="userFormation">Développement Web</div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <span class="material-icons">logout</span>
+            Déconnexion
+        </button>
     </div>
     
     <nav>
         <ul class="sidebar-nav">
             <li><a href="#" class="active" data-page="dashboard">
                 <span class="material-icons">dashboard</span>
-                Tableau de bord
+                Dashboard
             </a></li>
             <li><a href="#" data-page="courses">
                 <span class="material-icons">school</span>
@@ -611,19 +678,23 @@ body {
                 Mon profil
             </a></li>
             <li><a href="#" data-page="certificates">
-                <span class="material-icons">card_membership</span>
+                <span class="material-icons">workspace_premium</span>
                 Certificats
+            </a></li>
+            <li><a href="index.html" data-page="home" >
+                <span class="material-icons">home</span>
+                Home
             </a></li>
         </ul>
     </nav>
     
-    <div class="sidebar-footer">
-        <button class="logout-btn" id="logoutBtn">
-            <span class="material-icons">logout</span>
-            Déconnexion
-        </button>
-    </div>
+   
 </aside>
+
+<!-- TOGGLE BUTTON ON DIVIDER (Détaché pour éviter l'overflow) -->
+<button id="toggleSidebarMainBtn" class="sidebar-toggle-btn" title="Réduire/Agrandir le menu">
+    <span class="material-icons" id="sidebarToggleIcon">chevron_left</span>
+</button>
 
 <!-- MAIN CONTENT -->
 <main class="main-content">
@@ -657,7 +728,7 @@ body {
     <section class="stats-grid">
         <div class="stat-card">
             <div class="stat-icon lessons">
-                <span class="material-icons">menu_book</span>
+                <span class="material-icons">check_circle</span>
             </div>
             <div class="stat-value">24</div>
             <div class="stat-label">Leçons complétées</div>
@@ -681,7 +752,7 @@ body {
 
         <div class="stat-card">
             <div class="stat-icon grade">
-                <span class="material-icons">grade</span>
+                <span class="material-icons">stars</span>
             </div>
             <div class="stat-value">85%</div>
             <div class="stat-label">Score moyen</div>
@@ -691,7 +762,7 @@ body {
     <!-- PROGRESS SECTION -->
     <section class="progress-section">
         <h3 class="section-title">
-            <span class="material-icons">trending_up</span>
+            <span class="material-icons">track_changes</span>
             Progression des formations
         </h3>
         
@@ -731,7 +802,9 @@ body {
         <div class="chart-header">
             <h3 class="chart-title">Activité d'apprentissage</h3>
         </div>
-        <canvas id="activityChart" height="80"></canvas>
+        <div style="height: 180px; position: relative;">
+            <canvas id="activityChart"></canvas>
+        </div>
     </section>
 
     <!-- RECENT ACTIVITY -->
@@ -741,10 +814,9 @@ body {
             Activité récente
         </h3>
         
-        <ul class="activity-list">
             <li class="activity-item">
                 <div class="activity-icon lesson">
-                    <span class="material-icons">play_circle</span>
+                    <span class="material-icons">play_lesson</span>
                 </div>
                 <div class="activity-content">
                     <div class="activity-title">Leçon complétée</div>
@@ -755,7 +827,7 @@ body {
 
             <li class="activity-item">
                 <div class="activity-icon assignment">
-                    <span class="material-icons">assignment_turned_in</span>
+                    <span class="material-icons">assignment</span>
                 </div>
                 <div class="activity-content">
                     <div class="activity-title">Devoir soumis</div>
@@ -766,7 +838,7 @@ body {
 
             <li class="activity-item">
                 <div class="activity-icon achievement">
-                    <span class="material-icons">emoji_events</span>
+                    <span class="material-icons">military_tech</span>
                 </div>
                 <div class="activity-content">
                     <div class="activity-title">Nouveau succès</div>
@@ -777,7 +849,7 @@ body {
 
             <li class="activity-item">
                 <div class="activity-icon lesson">
-                    <span class="material-icons">play_circle</span>
+                    <span class="material-icons">play_lesson</span>
                 </div>
                 <div class="activity-content">
                     <div class="activity-title">Leçon complétée</div>
@@ -792,7 +864,7 @@ body {
     <section class="profile-section" id="profileSection" style="display: none;">
         <div class="progress-section">
             <h3 class="section-title">
-                <span class="material-icons">person</span>
+                <span class="material-icons">edit</span>
                 Modifier mon profil
             </h3>
             
@@ -844,7 +916,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function checkAuth() {
-    const session = JSON.parse(localStorage.getItem('cptech_session'));
+    const session = JSON.parse(localStorage.getItem('innovatech_session'));
     if (!session || !session.user) {
         window.location.href = 'login.html';
         return;
@@ -858,7 +930,7 @@ function checkAuth() {
 }
 
 function loadUsers() {
-    users = JSON.parse(localStorage.getItem('cptech_users')) || [];
+    users = JSON.parse(localStorage.getItem('innovatech_users')) || [];
 }
 
 function updateUserInfo() {
@@ -934,6 +1006,11 @@ function initChart() {
 // Navigation
 document.querySelectorAll('.sidebar-nav a').forEach(link => {
     link.addEventListener('click', function(e) {
+        if (this.dataset.page === 'home') {
+            window.location.href = 'index.html';
+            return;
+        }
+        
         e.preventDefault();
         document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
@@ -988,11 +1065,11 @@ document.getElementById('profileForm').addEventListener('submit', function(e) {
     };
     
     // Update localStorage
-    localStorage.setItem('cptech_users', JSON.stringify(users));
+    localStorage.setItem('innovatech_users', JSON.stringify(users));
     
     // Update session
     currentUser = users[userIndex];
-    localStorage.setItem('cptech_session', JSON.stringify({
+    localStorage.setItem('innovatech_session', JSON.stringify({
         user: {
             id: currentUser.id,
             email: currentUser.email,
@@ -1014,7 +1091,7 @@ document.getElementById('profileForm').addEventListener('submit', function(e) {
 
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', function() {
-    localStorage.removeItem('cptech_session');
+    localStorage.removeItem('innovatech_session');
     window.location.href = 'login.html';
 });
 
@@ -1034,6 +1111,25 @@ document.getElementById('viewCoursesBtn').addEventListener('click', function(e) 
     e.preventDefault();
     // Here you would navigate to the courses page
     document.querySelector('.sidebar-nav a[data-page="courses"]').click();
+});
+
+// Toggle Profile Section
+document.getElementById('toggleProfileBtn').addEventListener('click', function() {
+    const profileSection = document.getElementById('userProfileSection');
+    const icon = this.querySelector('.material-icons');
+    if (profileSection.style.display === 'none') {
+        profileSection.style.display = 'block';
+        icon.textContent = 'expand_less';
+    } else {
+        profileSection.style.display = 'none';
+        icon.textContent = 'expand_more';
+    }
+});
+
+// Toggle Sidebar Extérieur
+document.getElementById('toggleSidebarMainBtn').addEventListener('click', function() {
+    document.body.classList.toggle('sidebar-collapsed');
+    // Ne pas changer le texte de l'icône, on utilise rotate(180deg) via CSS
 });
 </script>
 

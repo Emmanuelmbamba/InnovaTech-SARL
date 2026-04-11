@@ -7,36 +7,39 @@
         header {
             background: linear-gradient(90deg, #1e1f20, #8aaed6);
             color: white;
-            padding: 25px;
+            padding: clamp(20px, 4vw, 25px);
             text-align: center;
         }
+        
         .hero {
             background: linear-gradient(rgba(87, 93, 100, 0.281), rgba(73, 97, 133, 0.85)),
             url('https://www.we-paie.com/wp-content/uploads/2021/07/formation-professionnelle.jpeg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 20px;
+            padding: clamp(80px, 15vw, 100px) 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 42px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: clamp(1rem, 2vw, 1.125rem);
         }
 
         .btn {
             background: white;
             color: #0d47a1;
-            padding: 12px 25px;
+            padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px);
             border-radius: 5px;
             border: none;
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
+            font-size: clamp(14px, 2vw, 16px);
+            transition: 0.3s;
         }
 
         .btn:hover {
@@ -46,19 +49,22 @@
         .container {
             max-width: 1200px;
             margin: auto;
-            padding: 50px 20px;
+            padding: clamp(30px, 5vw, 50px) 20px;
             text-align: center;
         }
 
         h2 {
             text-align: center;
             color: #0d47a1;
+            font-size: clamp(1.5rem, 4vw, 1.75rem);
             margin-bottom: 40px;
-            text-align: center;
         }
-.container p{
-    text-align: justify;
-}
+        
+        .container p{
+            text-align: justify;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
         .courses {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -67,7 +73,7 @@
 
         .card {
             background: white;
-            padding: 25px;
+            padding: clamp(15px, 4vw, 25px);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: 0.3s;
@@ -81,28 +87,58 @@
         .card h3 {
             color: #1565c0;
             text-align: center;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
         }
+        
         .card p {
             color: #121212;
             text-align: center;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .about {
             background: #e3f2fd;
-            padding: 40px;
+            padding: clamp(25px, 5vw, 40px);
             border-radius: 10px;
         }
 
         .contact {
             background: #6b8191;
             color: white;
-            padding: 40px;
+            padding: clamp(25px, 5vw, 40px);
             border-radius: 10px;
             text-align: center;
         }
 
         @media(max-width: 768px){
-            .hero h1 {
-                font-size: 28px;
+            .hero {
+                padding: 60px 15px;
+            }
+            
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .courses {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+        }
+        
+        @media(max-width: 480px){
+            .hero {
+                padding: 40px 10px;
+            }
+            
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .courses {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
             }
         }

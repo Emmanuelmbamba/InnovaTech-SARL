@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.classList.add('is-visible');
             }
         });
     }, observerOptions);
 
     // Observe all sections and cards
-    document.querySelectorAll('.section, .card').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll, .section, .card').forEach(el => {
         observer.observe(el);
     });
 

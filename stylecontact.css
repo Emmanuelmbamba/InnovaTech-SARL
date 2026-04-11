@@ -7,19 +7,20 @@
         header {
             background: linear-gradient(90deg, #0660e7, #2a2d30);
             color: white;
-            padding: 25px;
+            padding: clamp(20px, 4vw, 25px);
             text-align: center;
         }
 
         .container {
             max-width: 1100px;
             margin: auto;
-            padding: 50px 20px;
+            padding: clamp(30px, 5vw, 50px) 20px;
         }
 
         h2 {
             text-align: center;
             color: #0d47a1;
+            font-size: clamp(1.5rem, 4vw, 2rem);
         }
 
         .contact-grid {
@@ -31,13 +32,15 @@
 
         .card {
             background: white;
-            padding: 25px;
+            padding: clamp(20px, 4vw, 25px);
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         label {
             font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
         }
 
         input, textarea {
@@ -46,17 +49,19 @@
             margin: 8px 0 20px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
+            font-size: clamp(14px, 2vw, 16px);
         }
 
         button {
             background: #0d47a1;
             color: white;
-            padding: 12px;
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
             width: 100%;
             font-size: 16px;
             cursor: pointer;
+            transition: 0.3s;
         }
 
         button:hover {
@@ -77,10 +82,36 @@
             height: 250px;
             border-radius: 10px;
             border: none;
-        }   
+        }
+        
+        @media(max-width: 900px){
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media(max-width: 768px){
-            .hero h1 {
-                font-size: 28px;
+            .container {
+                padding: 30px 15px;
+            }
+            
+            input, textarea {
+                font-size: 16px;
+            }
+            
+            iframe {
+                height: 300px;
+            }
+        }
+        
+        @media(max-width: 480px){
+            header {
+                padding: 20px 10px;
+            }
+            
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
             }
         }
   

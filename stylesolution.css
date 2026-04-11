@@ -13,60 +13,63 @@ body{
 /* HEADER */
 header{
     background:#0d0d0e;
-    padding:20px 60px;
+    padding: clamp(15px, 3vw, 20px) clamp(20px, 5vw, 60px);
     display:flex;
     justify-content:space-between;
     align-items:center;
     color:white;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 header h1{
-    font-size:24px;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
 }
+
 /* HERO SECTION */
 .hero{
     background:linear-gradient(rgba(17, 17, 17, 0.216),rgba(3, 95, 232, 0.255)),
     url("https://cdn.pixabay.com/photo/2016/02/22/18/05/www-1216175_1280.png") center/cover;
     color:rgb(255, 255, 255);
     text-align:center;
-    padding:120px 20px;
+    padding: clamp(80px, 15vw, 120px) 20px;
 }
 
 .hero h2{
-    font-size:40px;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     margin-bottom:20px;
 }
 
 .hero p{
     max-width:700px;
     margin:auto;
-    font-size:18px;
+    font-size: clamp(1rem, 2vw, 1.125rem);
 }
 
 /* SOLUTIONS */
 .solutions{
-padding:20px;
-width: 90%;
-margin: auto;
-border-radius: 10px;
+    padding: clamp(15px, 4vw, 20px);
+    width: 90%;
+    margin: auto;
+    border-radius: 10px;
 }
 
 .solutions h2{
     text-align:center;
-    margin-bottom:60px;
-    font-size:32px;
+    margin-bottom: clamp(40px, 8vw, 60px);
+    font-size: clamp(1.6rem, 4vw, 2rem);
     color:#0d47a1;
 }
 
 .solution-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+    gap: clamp(20px, 4vw, 30px);
 }
 
 .card{
     background:white;
-    padding:30px;
+    padding: clamp(20px, 4vw, 30px);
     border-radius:12px;
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
     transition:0.4s;
@@ -79,10 +82,11 @@ border-radius: 10px;
 .card h3{
     margin-bottom:15px;
     color:#0d47a1;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
 }
 
 .card p{
-    font-size:15px;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
     line-height:1.6;
 }
 
@@ -91,24 +95,63 @@ border-radius: 10px;
     background:#0d47a1;
     color:white;
     text-align:center;
-    padding:70px 20px;
+    padding: clamp(40px, 8vw, 70px) 20px;
     border-radius: 1px;
 }
 
 .cta h2{
     margin-bottom:20px;
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
 }
 
 .cta a{
     background:white;
     color:#0d47a1;
-    padding:12px 30px;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
     border-radius:30px;
     text-decoration:none;
     font-weight:bold;
     transition:0.3s;
+    display: inline-block;
+    font-size: clamp(14px, 2vw, 1rem);
 }
 
 .cta a:hover{
     background:#bbdefb;
+}
+
+@media(max-width: 900px){
+    .solution-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media(max-width: 768px){
+    header{
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .solutions{
+        width: 95%;
+    }
+}
+
+@media(max-width: 480px){
+    header h1 {
+        font-size: 18px;
+    }
+    
+    .hero {
+        padding: 60px 15px;
+    }
+    
+    .solution-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .cta {
+        padding: 40px 15px;
+    }
 }

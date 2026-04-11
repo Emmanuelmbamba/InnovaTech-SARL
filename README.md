@@ -1,8 +1,8 @@
-# CPTech SARL - Plateforme de Formation Professionnelle
+# InnovaTech SARL - Plateforme de Formation Professionnelle
 
 ## 🎯 Projet
 
-Plateforme web moderne pour le Centre Professionnel en Technologie (CPTech) offrant des formations en développement web, administration réseau, cybersécurité et maintenance informatique.
+Plateforme web moderne pour le Centre Professionnel en Technologie (InnovaTech) offrant des formations en développement web, administration réseau, cybersécurité et maintenance informatique.
 
 ## 🚀 Fonctionnalités Implémentées
 
@@ -93,12 +93,12 @@ d:\Projet_ENLIGNE\
 3. **Dashboard personnel** : `user-dashboard.html`
 
 ### Pour les Administrateurs
-1. **Connexion admin** : `login.html` (admin@cptech.com / admin123)
+1. **Connexion admin** : `login.html` (admin@innovatech.com / admin123)
 2. **Dashboard admin** : `admin-dashboard.html`
 
 ### Comptes de Démo
-- **Admin** : `admin@cptech.com` / `admin123`
-- **User** : `user@cptech.com` / `user123`
+- **Admin** : `admin@innovatech.com` / `admin123`
+- **User** : `user@innovatech.com` / `user123`
 
 ## ✨ Caractéristiques Techniques
 
@@ -138,7 +138,7 @@ d:\Projet_ENLIGNE\
 
 ## 📞 Contact
 
-**CPTech SARL** - Centre Professionnel en Technologie  
+**InnovaTech SARL** - Centre Professionnel en Technologie  
 Directeur : Emmanuel Mbamba  
 Localisation : Kinshasa, RDC
 
